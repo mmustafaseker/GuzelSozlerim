@@ -1,4 +1,6 @@
-﻿using GuzelSozlerim.Models;
+﻿using GuzelSozlerim.Data;
+using GuzelSozlerim.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace GuzelSozlerim.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,ApplicationDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_dbContext.GuzelSozler.ToList());
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+  
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

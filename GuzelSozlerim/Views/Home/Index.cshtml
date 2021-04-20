@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <label>
+        <input type="checkbox" value="" id="" /> Sadece beğendiklerimi göster
+    </label>
+    <h1>Güzel Sözler</h1>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @item.Soz (Toplam Beğeni Sayısı: xxx)
+                <div class="btn-group">
+                    @*<a href="#" class="btn btn-sm btn-outline-secondary" title="@FavTitle()" data-toggle="tooltip" data-selected="@isFavorite" data-fav-id="@item.Id">
+                        @if (isFavorite)
+                        {
+                            <i class="fas fa-heart text-danger"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-heart"></i>
+                        }
+                    </a>*@
+                </div>
+            </li>
+
+        }
+    </ul>
 </div>

@@ -12,6 +12,13 @@ namespace GuzelSozlerim.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            //çoka çok ilişki oluşturma
+            builder.Entity<KullaniciSoz>().HasKey(x => new { x.GuzelSozId, x.KullaniciId });
+            base.OnModelCreating(builder);
+        }
+        public DbSet<KullaniciSoz> KullaniciSozler{ get; set; }
         public DbSet<GuzelSoz> GuzelSozler { get; set; }
     }
 }

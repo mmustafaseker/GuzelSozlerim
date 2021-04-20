@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GuzelSozlerim</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -45,11 +46,17 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - GuzelSozlerim - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span class="float-right">
+                @*@await Component.InvokeAsync("RastgeleSoz")*@
+                @*@await Component.InvokeAsync("RastgeleSoz", new { enYeniyiGoster=true})*@
+                <vc:rastgele-soz en-yeniyi-goster="false"></vc:rastgele-soz>
+            </span>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/font-awesome/js/fontawesome.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
