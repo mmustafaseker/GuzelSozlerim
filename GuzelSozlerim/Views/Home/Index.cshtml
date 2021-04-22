@@ -7,7 +7,7 @@
     <div class="d-flex align-items-end">
         <h1 class="mr-auto">Güzel Sözler</h1>
         <label>
-            <input type="checkbox" value="" id="" /> Sadece beğendiklerimi göster
+            <input type="checkbox" id="sadeceBegendiklerimiGoster" /> Sadece beğendiklerimi göster
         </label>
     </div>
     <div>
@@ -15,7 +15,7 @@
         {
             bool begenildi = User.Identity.IsAuthenticated && item.Begenenler.Any(x => x.KullaniciId == User.GetUserId());
 
-            <div class="card mb-3">
+            <div class="card mb-3 @(begenildi ? "card-begenildi" : "card-begenilmedi")">
                 <div class="card-body d-flex align-items-center">
                     <div>
                         <p class="mb-1">
@@ -41,6 +41,15 @@
         var girisYapildi= @User.Identity.IsAuthenticated.ToString().ToLower();
         if (girisYapildi)
         {
+            $("#sadeceBegendiklerimiGoster").change(function (event) {
+
+                if ($(this).prop("checked")) {
+                    $(".card-begenilmedi").hide();
+                }
+                else {
+                    $(".card-begenilmedi").show();
+                }
+            });
             $("[data-begen-id]").click(function (event) {
                 event.preventDefault();
                 var a = this;
@@ -56,11 +65,13 @@
                         $(a).data("begenildiMi", begenildiMi);
                         if (begenildiMi) {
                             $(a).children("i").first().removeClass("far").addClass("fas");
+                            $().closest(".card").removeClass("card-begenilmedi").addClass("card-begenildi");
                             $(a).attr("title", "Beğeniyi Kaldır");
                             spanBegeniAdet.text(begeniAdet + 1);
                         }
                         else {
                             $(a).children("i").first().removeClass("fas").addClass("far");
+                            $().closest(".card").removeClass("card-begenildi").addClass("card-begenilmedi");
                             $(a).attr("title", "Beğeniyi Kaldır")
                             spanBegeniAdet.text(begeniAdet - 1);
 
